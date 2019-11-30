@@ -6,7 +6,6 @@ const initialState = {
     userId: null,
     error: null,
     loading: false,
-    user: null,
     authRedirectPath: '/'
 };
 
@@ -19,7 +18,6 @@ const authSuccess = (state, action) => {
         token: action.token,
         userId: action.userId,
         error: null,
-        user: null,
         loading: false,
     });
 };
@@ -32,7 +30,6 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-    localStorage.clear();
     return updateObject(state, { token: null, userId: null, user: null });
 };
 
