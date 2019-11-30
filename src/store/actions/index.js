@@ -6,3 +6,7 @@ export {
     setAuthRedirectPath,
     authCheckState
 } from './auth.actions';
+export {
+    user,
+    getUserSuccess,
+} from './user.actions';

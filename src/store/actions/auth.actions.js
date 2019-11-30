@@ -8,13 +8,6 @@ export const authStart = () => {
   };
 };
 
-export const userDataSuccess = (userData) => {
-  return {
-    type: actionTypes.GET_USER_SUCCESS,
-    user: userData
-  };
-};
-
 
 export const authSuccess = (userId, token) => {
   return {
@@ -24,10 +17,10 @@ export const authSuccess = (userId, token) => {
   };
 };
 
-export const getUserSuccess = (userId) => {
+export const getUserSuccess = (user) => {
   return {
     type: actionTypes.GET_USER_SUCCESS,
-    userId: userId
+    user: user[0]
   };
 };
 
@@ -54,7 +47,7 @@ export const loginUser = (email, password) => {
     authService.login(email, password).then(
       user => {
         dispatch(authSuccess(user.data.user.id, user.data.token));
-        dispatch(getUserSuccess(user.data.user.id));
+        dispatch(getUserSuccess(user.data.user));
       },
       error => {
         dispatch(snackbar.show({
@@ -87,6 +80,7 @@ export const setAuthRedirectPath = (path) => {
     path: path
   };
 };
+
 
 export const authCheckState = () => {
   return dispatch => {
