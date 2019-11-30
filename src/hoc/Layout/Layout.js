@@ -10,9 +10,8 @@ const layout = props => {
   const [sideDrawerIsVisible, setSideDrawerIsVisible] = useState(false);
 
   const loggedInUser = useSelector(state => state.auth.token)
-  const user = useSelector(state => state.auth.user)
+  const user = useSelector(state => state.user.user)
 
-  console.log(user);
   let toolbar;
   
   const sideDrawerToggleHandler = () => {

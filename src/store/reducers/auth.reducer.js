@@ -24,7 +24,6 @@ const authSuccess = (state, action) => {
     });
 };
 
-
 const authFail = (state, action) => {
     return updateObject(state, {
         error: action.error,
@@ -33,6 +32,7 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
+    localStorage.clear();
     return updateObject(state, { token: null, userId: null, user: null });
 };
 
