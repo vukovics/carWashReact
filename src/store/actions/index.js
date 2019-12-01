@@ -1,5 +1,4 @@
 export {
-    auth,
     loginUser,
     registerUser,
     logout,
@@ -7,6 +6,8 @@ export {
     authCheckState
 } from './auth.actions';
 export {
-    user,
     getUserSuccess,
 } from './user.actions';
+export {
+    getCompanies,
+} from './company.actions';

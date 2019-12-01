@@ -13,7 +13,7 @@ async function login(email, password) {
         password: password
     }
 
-    let url = 'https://api.bookcarwash4you.com/api/login';
+    let url = 'http://localhost:8000/api/login';
     const response = await axios.post(url, authInfo);
     const responseSuccess = await handleResponse(response);
     localStorage.setItem('token', responseSuccess.data.token);
