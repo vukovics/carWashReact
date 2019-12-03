@@ -3,13 +3,13 @@ import React, { Fragment  } from 'react';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 
-const homePage = props => {
+const offersPage = props => {
 
   return (
     <Fragment>
-      Home Page
+      Offers Page
     </Fragment>
   );
 };
 
-export default withErrorHandler(homePage, axios);
+export default withErrorHandler(offersPage, axios);

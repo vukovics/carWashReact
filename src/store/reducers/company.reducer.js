@@ -10,10 +10,17 @@ const getCompanies = (state, action) => {
     companies: action.allCompanies,
   };
 }
+const getCompanyOffers = (state, action) => {
+  return {
+    ...state,
+    selectedCompanyOffers: action.companyOffers,
+  };
+}
 
 const reducer = (state = initialCompanyState, action) => {
   switch (action.type) {
     case actionTypes.GET_COMPANIES_SUCCESS: return getCompanies(state, action);
+    case actionTypes.GET_COMPANY_OFFERS_SUCCESS: return getCompanyOffers(state, action);
     default:
       return state;
   }

@@ -7,7 +7,6 @@ import Logout from './containers/Auth/Logout/Logout';
 import * as actions from './store/actions/index';
 import Dashboard from './containers/Dashboard/Dashboard';
 
-
 const Login = React.lazy(() => {
   return import('./containers/Login/Login');
 });
@@ -20,9 +19,13 @@ const homePage = React.lazy(() => {
   return import('./containers/HomePage/HomePage');
 });
 
+const offersPage = React.lazy(() => {
+  return import('./containers/Offers/Offers');
+});
+
 const app = props => {
   const { onTryAutoSignup } = props;
-  
+
   useEffect(() => {
     onTryAutoSignup();
   }, [onTryAutoSignup]);
@@ -39,9 +42,9 @@ const app = props => {
   if (props.isAuthenticated) {
     routes = (
       <Switch>
-        <Route path="/logout" component={Logout} />
         <Route path="/" exact component={Dashboard} />
-        <Redirect to="/" />
+        <Route path="/logout" component={Logout} />
+        <Route exact path="/offers" component={offersPage} />
       </Switch>
     );
   }
@@ -49,7 +52,7 @@ const app = props => {
   return (
     <div>
       <Layout>
-        <Suspense fallback={<p>Loading...getUser</p>}>{routes}</Suspense>
+        <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
       </Layout>
     </div>
   );

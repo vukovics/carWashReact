@@ -10,4 +10,5 @@ export {
 } from './user.actions';
 export {
     getCompanies,
+    getCompanyOffers,
 } from './company.actions';

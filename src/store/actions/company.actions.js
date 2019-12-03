@@ -1,7 +1,7 @@
 import * as actionTypes from './actionTypes';
 import { snackbarActions as snackbar } from 'material-ui-snackbar-redux'
-import {companyService} from '../../services/company.service'
-
+import { companyService } from '../../services/company.service'
+import { push } from 'react-router-redux'
 
 export const getCompaniesSuccess = (companies) => {
   return {
@@ -23,3 +23,29 @@ export const getCompanies = () => {
       });
   };
 };
+
+export const getCompanyOfferSuccess = (companyOffers) => {
+  return {
+    type: actionTypes.GET_COMPANY_OFFERS_SUCCESS,
+    companyOffers: companyOffers
+  };
+};
+
+export const getCompanyOffers = (companyId) => {
+  return dispatch => {
+    companyService.getCompanyOffers(companyId).then(
+      companyOffers => {
+        dispatch(getCompanyOfferSuccess(companyOffers.data.companyOffer));
+      },
+      error => {
+        dispatch(snackbar.show({
+          message: error.message
+        }))
+      }).then(() => {
+        dispatch(push('/offers'))
+      });
+  };
+};
+
+
+

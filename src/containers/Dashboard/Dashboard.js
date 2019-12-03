@@ -1,31 +1,14 @@
-import React, { Fragment, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { Grid, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import Table from '../../components/UI/Table/Table';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
 import axios from '../../axios-orders';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-}));
-
-
-const dashboard = props => {
+const dashboard = () => {
 
   const useStyles = makeStyles({
     root: {
@@ -35,9 +18,16 @@ const dashboard = props => {
     table: {
       minWidth: 650,
     },
+    tableCompany: {
+      padding: '2rem'
+    }
   });
 
+  let companies = [];
+  let tableColumns = [];
+
   const dispatch = useDispatch();
+
 
   const getCompanies = useCallback(
     () => dispatch(actions.getCompanies()),
@@ -46,47 +36,29 @@ const dashboard = props => {
 
   useEffect(() => {
     getCompanies();
-    
-  }, [getCompanies]);
+  }, [dispatch]);
 
   const classes = useStyles();
 
-  let companies = useSelector(state => state.companies.companies)
-  console.log(companies);
+  const handleBooking = (company) => {
+    dispatch(actions.getCompanyOffers(company.company_id));
+  };
+
+  tableColumns = ['Company', 'City', 'Working time', 'Book'];
+  companies = useSelector(state => state.companies.companies)
 
   return (
-    <Fragment>
-      <Grid container spacing={3}>
-
-        { companies.length > 0 ? 
+    <div>
+      <Grid container className={classes.tableCompany}>
         <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {companies.length > 0 ? companies.map(row => (
-              <TableRow key={row.company_id}>
-                <TableCell component="th" scope="row">
-                  {row.company}
-                </TableCell>
-                <TableCell align="right">{row.company}</TableCell>
-                <TableCell align="right">{row.country}</TableCell>
-                <TableCell align="right">{row.city}</TableCell>
-              </TableRow>
-            )) : []}
-          </TableBody>
-        </Table>
-      </Paper>
-       : ''}
+          <Table
+            columns={tableColumns}
+            rows={companies}
+            onBook={handleBooking}
+          />
+        </Paper>
       </Grid>
-    </Fragment>
+    </div>
   );
 };
 
