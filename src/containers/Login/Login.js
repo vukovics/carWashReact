@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
@@ -35,10 +35,11 @@ const login = (props) => {
   })
 
   const classes = useStyles();
+  let history = useHistory();
 
   const submitHandler = event => {
     event.preventDefault();
-    dispatch(actions.loginUser(loginForm.email, loginForm.password));
+    dispatch(actions.loginUser(loginForm.email, loginForm.password, history));
   };
 
   const changeHandler = (event) => {
