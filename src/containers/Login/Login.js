@@ -1,16 +1,20 @@
-import React, { useState} from 'react';
-import { connect } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import React, {useState} from 'react';
+import {connect} from 'react-redux';
+import {Link, useHistory} from 'react-router-dom';
+import {makeStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
+import Paper from '@material-ui/core/Paper';
 
 import * as actions from '../../store/actions/index';
 
-
 const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(3, 2),
+    background: '#b7b7b775',
+  },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -18,21 +22,20 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200,
+    width: '100%',
   },
   button: {
     margin: theme.spacing(1),
   },
 }));
 
-const login = (props) => {
-
+const login = props => {
   const dispatch = useDispatch();
 
   const [loginForm, setLoginForm] = useState({
-    email : '',
-    password: ''
-  })
+    email: '',
+    password: '',
+  });
 
   const classes = useStyles();
   let history = useHistory();
@@ -42,18 +45,18 @@ const login = (props) => {
     dispatch(actions.loginUser(loginForm.email, loginForm.password, history));
   };
 
-  const changeHandler = (event) => {
+  const changeHandler = event => {
     setLoginForm({
       ...loginForm,
-      [event.target.name] : event.target.value
-    })
-  }
+      [event.target.name]: event.target.value,
+    });
+  };
 
   return (
     <div>
       <Container maxWidth="sm">
-        <form className={classes.container} noValidate autoComplete="off">
-          <div>
+        <Paper className={classes.root}>
+          <form className={classes.container} noValidate autoComplete="off">
             <TextField
               className={classes.textField}
               label="email"
@@ -69,12 +72,19 @@ const login = (props) => {
               type="password"
               onChange={changeHandler}
             />
-            <Button variant="contained" onClick={submitHandler} color="primary" className={classes.button}>
+            <Button
+              variant="contained"
+              onClick={submitHandler}
+              color="primary"
+              className={classes.button}
+            >
               Login
             </Button>
-          </div>
-        </form>
-        <Link to="/register">Register</Link>
+            <Button component={Link} to="/register">
+              Register
+            </Button>
+          </form>
+        </Paper>
       </Container>
     </div>
   );
@@ -85,10 +95,8 @@ const mapStateToProps = state => {
     loading: state.auth.loading,
     error: state.auth.error,
     isAuthenticated: state.auth.token !== null,
-    authRedirectPath: state.auth.authRedirectPath
+    authRedirectPath: state.auth.authRedirectPath,
   };
 };
 
-export default connect(
-  mapStateToProps,
-)(login);
+export default connect(mapStateToProps)(login);
