@@ -54,7 +54,15 @@ const login = props => {
 
   return (
     <div>
-      <Container maxWidth="sm">
+      <Container
+        maxWidth="sm"
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{minHeight: '100vh'}}
+      >
         <Paper className={classes.root}>
           <form className={classes.container} noValidate autoComplete="off">
             <TextField

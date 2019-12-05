@@ -1,7 +1,8 @@
 import axios from 'axios';
 export const companyService = {
     getCompanies,
-    getCompanyOffers
+    getCompanyOffers,
+    getSelectedCompanyById
 };
 
 async function getCompanies() {
@@ -12,6 +13,12 @@ async function getCompanies() {
 
 async function getCompanyOffers(companyId) {
     let url = 'http://localhost:8000/api/company/' + companyId;
+    const response = await axios.get(url);
+    return response;
+}
+
+async function getSelectedCompanyById(companyId) {
+    let url = 'http://localhost:8000/api/companyInfo/' + companyId;
     const response = await axios.get(url);
     return response;
 }

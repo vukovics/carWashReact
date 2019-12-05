@@ -33,6 +33,13 @@ export const getCompanyOfferSuccess = companyOffers => {
   };
 };
 
+export const getSelectedCompanySuccess = selectedCompany => {
+  return {
+    type: actionTypes.GET_SELECTED_COMPANY_SUCCESS,
+    selectedCompany: selectedCompany,
+  };
+};
+
 export const getCompanyOffers = (companyId, history) => {
   return dispatch => {
     companyService
@@ -52,5 +59,24 @@ export const getCompanyOffers = (companyId, history) => {
       .then(() => {
         history.push('/offers');
       });
+  };
+};
+
+export const getSelectedCompany = (companyId) => {
+  return dispatch => {
+    companyService
+      .getSelectedCompanyById(companyId)
+      .then(
+        company => {
+          dispatch(getSelectedCompanySuccess(company.data.company));
+        },
+        error => {
+          dispatch(
+            snackbar.show({
+              message: error.message,
+            })
+          );
+        }
+      )
   };
 };

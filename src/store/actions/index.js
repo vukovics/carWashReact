@@ -11,4 +11,5 @@ export {
 export {
     getCompanies,
     getCompanyOffers,
+    getSelectedCompany,
 } from './company.actions';

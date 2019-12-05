@@ -41,6 +41,7 @@ const dashboard = () => {
 
   const handleBooking = company => {
     dispatch(actions.getCompanyOffers(company.company_id, history));
+    dispatch(actions.getSelectedCompany(company.company_id));
   };
 
   tableColumns = ['Company', 'City', 'Working time', 'Book'];
