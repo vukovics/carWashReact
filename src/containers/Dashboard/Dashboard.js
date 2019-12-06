@@ -4,6 +4,7 @@ import {useHistory} from 'react-router-dom';
 import {Grid, Paper} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import Table from '../../components/UI/Table/Table';
+import Container from '@material-ui/core/Container';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
@@ -48,8 +49,8 @@ const dashboard = () => {
   companies = useSelector(state => state.companies.companies);
 
   return (
-    <div>
-      <Grid container className={classes.tableCompany}>
+    <Container>
+      <Grid className={classes.tableCompany}>
         <Paper className={classes.root}>
           <Table
             columns={tableColumns}
@@ -58,7 +59,7 @@ const dashboard = () => {
           />
         </Paper>
       </Grid>
-    </div>
+  </Container>
   );
 };
 

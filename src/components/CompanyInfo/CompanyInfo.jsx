@@ -2,7 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-import { red } from '@material-ui/core/colors';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 function CompanyInfo({ selectedCompany }) {
 
@@ -22,29 +24,29 @@ function CompanyInfo({ selectedCompany }) {
   const CompanyInfo = () => {
     return (
       selectedCompany ?
-      <div className={classes.root}>
-      <Grid container spacing={3} key={selectedCompany.company}>
-        <Grid item xs={12}>
-            Wash Info
-        </Grid>
-        <Grid item xs={12}>
-            Company name: {selectedCompany.company}
-        </Grid>
-        <Grid item xs={12}>
-            Country: {selectedCompany.country}
-        </Grid>
-        <Grid item xs={12}>
-            City: {selectedCompany.city}
-        </Grid>
-        <Grid item xs={12}>
-            Address: {selectedCompany.address}
-        </Grid>
-      </Grid>
-      </div>
-      :
-      <div>
-        Nista
-      </div>
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography className={classes.pos} color="textSecondary">
+          Company name: {selectedCompany.company}
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+          Country: {selectedCompany.country}
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+          City: {selectedCompany.city}
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+          {selectedCompany.address ? 'Address: '+selectedCompany.address: ''}
+          </Typography>
+        </CardContent>
+      </Card>:
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography className={classes.pos} color="textSecondary">
+            No info
+          </Typography>
+        </CardContent>
+      </Card>
     )
   };
 

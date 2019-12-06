@@ -9,11 +9,10 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Button from '@material-ui/core/Button';
 
-function OfferCard({ selectedCompanyOffers }) {
+function OfferCard({ selectedCompanyOffers, onSelectOffer }) {
 
   const useStyles = makeStyles(theme => ({
     card: {
@@ -43,7 +42,7 @@ function OfferCard({ selectedCompanyOffers }) {
   const OfferCard = () => {
     return selectedCompanyOffers && selectedCompanyOffers.length > 0 ?
     selectedCompanyOffers.map(offer => (
-      <Card className={classes.card} key={offer.company_id}>
+      <Card className={classes.card} key={offer.id} style={{marginRight: '1rem', marginTop: '1rem'}}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
@@ -70,12 +69,9 @@ function OfferCard({ selectedCompanyOffers }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        <Button variant="contained" onClick={() => onSelectOffer(offer)} color="primary">
+          Book
+        </Button>
       </CardActions>
     </Card>
     )) :
