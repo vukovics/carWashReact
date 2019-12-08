@@ -53,7 +53,6 @@ const login = props => {
   };
 
   return (
-    <div>
       <Container
         maxWidth="sm"
         container
@@ -94,7 +93,6 @@ const login = props => {
           </form>
         </Paper>
       </Container>
-    </div>
   );
 };
 

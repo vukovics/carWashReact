@@ -12,7 +12,7 @@ import { red } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 
-function OfferCard({ selectedCompanyOffers, onSelectOffer }) {
+function OfferCard({ selectedCompanyOffers, onSelectOffer, selectedOffer }) {
 
   const useStyles = makeStyles(theme => ({
     card: {
@@ -35,14 +35,23 @@ function OfferCard({ selectedCompanyOffers, onSelectOffer }) {
     avatar: {
       backgroundColor: red[500],
     },
+    selectedCard: {
+      backgroundColor: red[500]
+    }
   }));
 
   const classes = useStyles();
 
+ console.log(selectedOffer);
+
   const OfferCard = () => {
     return selectedCompanyOffers && selectedCompanyOffers.length > 0 ?
     selectedCompanyOffers.map(offer => (
-      <Card className={classes.card} key={offer.id} style={{marginRight: '1rem', marginTop: '1rem'}}>
+      <Card
+      className={selectedOffer && selectedOffer.id === offer.id ? `${classes.card} ${classes.selectedCard}`
+      : classes.card}
+      key={offer.id}
+      style={{marginRight: '1rem', marginTop: '1rem'}}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>

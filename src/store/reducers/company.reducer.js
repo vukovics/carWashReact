@@ -23,6 +23,13 @@ const getSelectedCompanySuccess = (state, action) => {
   };
 };
 
+const setSelectedOfferSuccess = (state, action) => {
+  return {
+    ...state,
+    selectedOffer: action.selectedOffer,
+  };
+};
+
 const reducer = (state = initialCompanyState, action) => {
   switch (action.type) {
     case actionTypes.GET_COMPANIES_SUCCESS:
@@ -31,6 +38,8 @@ const reducer = (state = initialCompanyState, action) => {
       return getCompanyOffers(state, action);
     case actionTypes.GET_SELECTED_COMPANY_SUCCESS:
       return getSelectedCompanySuccess(state, action);
+    case actionTypes.SET_SELECTED_OFFER_SUCCESS:
+      return setSelectedOfferSuccess(state, action);
     default:
       return state;
   }

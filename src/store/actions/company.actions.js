@@ -33,6 +33,14 @@ export const getCompanyOfferSuccess = companyOffers => {
   };
 };
 
+export const setSelectedOfferSuccess = offer => {
+  return {
+    type: actionTypes.SET_SELECTED_OFFER_SUCCESS,
+    selectedOffer: offer,
+  };
+};
+
+
 export const getSelectedCompanySuccess = selectedCompany => {
   return {
     type: actionTypes.GET_SELECTED_COMPANY_SUCCESS,

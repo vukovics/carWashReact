@@ -12,4 +12,5 @@ export {
     getCompanies,
     getCompanyOffers,
     getSelectedCompany,
+    setSelectedOfferSuccess,
 } from './company.actions';
