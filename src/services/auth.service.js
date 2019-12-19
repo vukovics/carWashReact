@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { getUserSuccess } from '../store/actions/auth.actions';
 
 export const authService = {
     login,

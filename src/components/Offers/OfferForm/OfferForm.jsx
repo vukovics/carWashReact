@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import * as Yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import {Formik} from 'formik';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -71,12 +73,10 @@ function OfferForm({selectedOffer, onSubmitRequest}) {
           values,
           touched,
           errors,
-          dirty,
           isSubmitting,
           handleChange,
           handleBlur,
           handleSubmit,
-          handleReset,
         } = props;
         return selectedOffer ? (
           <form onSubmit={handleSubmit}>
@@ -170,6 +170,7 @@ function OfferForm({selectedOffer, onSubmitRequest}) {
                   <Button
                     variant="contained"
                     type="submit"
+                    disabled={isSubmitting}
                     color="primary"
                     className={classes.button}
                   >
@@ -180,7 +181,11 @@ function OfferForm({selectedOffer, onSubmitRequest}) {
             </MuiPickersUtilsProvider>
           </form>
         ) : (
-          'Select Offer'
+          <Paper className={classes.root}>
+            <Typography variant="h5" component="h3">
+              Select offer
+            </Typography>
+          </Paper>
         );
       }}
     </Formik>
