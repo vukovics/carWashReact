@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {Formik} from 'formik';
 import DateFnsUtils from '@date-io/date-fns';
+import { DatePicker } from "@material-ui/pickers";
+import { TimePicker } from "@material-ui/pickers";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -48,7 +50,7 @@ function OfferForm({selectedOffer, onSubmitRequesrt}) {
         firstname: '',
         lastname: '',
         number: '',
-        data: '',
+        date: '',
       }}
       onSubmit={(values, {setSubmitting}) => {
         console.log('yaas');
@@ -62,7 +64,6 @@ function OfferForm({selectedOffer, onSubmitRequesrt}) {
         firstname: Yup.string().required('Required'),
         lastname: Yup.string().required('Required'),
         number: Yup.string().required('Required'),
-        data: Yup.string().required('Required'),
       })}
     >
       {props => {
@@ -117,8 +118,8 @@ function OfferForm({selectedOffer, onSubmitRequesrt}) {
                     error={errors.lastname && touched.lastname}
                     label="Lastname"
                     name="lastname"
+                    value={values.lastname}
                     className={classes.textField}
-                    value={values.comment}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     helperText={
@@ -133,8 +134,8 @@ function OfferForm({selectedOffer, onSubmitRequesrt}) {
                     error={errors.number && touched.number}
                     label="Number"
                     name="number"
+                    value={values.number}
                     className={classes.textField}
-                    value={values.comment}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     helperText={
@@ -144,38 +145,32 @@ function OfferForm({selectedOffer, onSubmitRequesrt}) {
                   />
                 </Grid>
                 <Grid item xs={6} className={classes.textFieldPadding}>
-                  <KeyboardDatePicker
+                  <DatePicker
                     fullWidth
-                    margin="normal"
-                    id="date-picker-dialog"
-                    label="Date picker dialog"
+                    label="Basic example"
+                    value={values.date = selectedDate}
+                    name="date"
                     format="MM/dd/yyyy"
-                    value={selectedDate}
                     onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date',
-                    }}
+                    animateYearScrolling
                   />
                 </Grid>
                 <Grid item xs={6} className={classes.textFieldPadding}>
-                  <KeyboardTimePicker
-                    fullWidth
-                    margin="normal"
-                    id="time-picker"
-                    label="Time picker"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change time',
-                    }}
-                  />
+                <TimePicker
+                  fullWidth
+                  clearable
+                  ampm={false}
+                  name="time"
+                  label="24 hours"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                />
                 </Grid>
               </Grid>
             </MuiPickersUtilsProvider>
             <Button
               variant="contained"
               type="submit"
-              disabled={isSubmitting}
               color="primary"
               className={classes.button}
             >
