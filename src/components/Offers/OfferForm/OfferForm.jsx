@@ -6,15 +6,13 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {Formik} from 'formik';
 import DateFnsUtils from '@date-io/date-fns';
-import { DatePicker } from "@material-ui/pickers";
-import { TimePicker } from "@material-ui/pickers";
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
+  DatePicker,
+  TimePicker,
 } from '@material-ui/pickers';
 
-function OfferForm({selectedOffer, onSubmitRequesrt}) {
+function OfferForm({selectedOffer, onSubmitRequest}) {
   const [selectedDate, setSelectedDate] = React.useState(
     new Date('2014-08-18T21:11:54')
   );
@@ -30,6 +28,9 @@ function OfferForm({selectedOffer, onSubmitRequesrt}) {
     },
     textFieldPadding: {
       paddingRight: '1rem',
+    },
+    buttonPadding: {
+      paddingTop: '1rem',
     },
     paper: {
       maxWidth: 400,
@@ -53,9 +54,8 @@ function OfferForm({selectedOffer, onSubmitRequesrt}) {
         date: '',
       }}
       onSubmit={(values, {setSubmitting}) => {
-        console.log('yaas');
         setSubmitting(true);
-        console.log(values);
+        onSubmitRequest(values);
       }}
       validationSchema={Yup.object().shape({
         email: Yup.string()
@@ -78,11 +78,11 @@ function OfferForm({selectedOffer, onSubmitRequesrt}) {
           handleSubmit,
           handleReset,
         } = props;
-        return ( selectedOffer ?
+        return selectedOffer ? (
           <form onSubmit={handleSubmit}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <Grid container justify="space-between">
-                <Grid item xs={6}  className={classes.textFieldPadding}>
+                <Grid item xs={6} className={classes.textFieldPadding}>
                   <TextField
                     fullWidth
                     error={errors.firstname && touched.firstname}
@@ -148,7 +148,7 @@ function OfferForm({selectedOffer, onSubmitRequesrt}) {
                   <DatePicker
                     fullWidth
                     label="Basic example"
-                    value={values.date = selectedDate}
+                    value={(values.date = selectedDate)}
                     name="date"
                     format="MM/dd/yyyy"
                     onChange={handleDateChange}
@@ -156,27 +156,31 @@ function OfferForm({selectedOffer, onSubmitRequesrt}) {
                   />
                 </Grid>
                 <Grid item xs={6} className={classes.textFieldPadding}>
-                <TimePicker
-                  fullWidth
-                  clearable
-                  ampm={false}
-                  name="time"
-                  label="24 hours"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                />
+                  <TimePicker
+                    fullWidth
+                    clearable
+                    ampm={false}
+                    name="time"
+                    label="24 hours"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                  />
+                </Grid>
+                <Grid item xs={6} className={classes.buttonPadding}>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    color="primary"
+                    className={classes.button}
+                  >
+                    Submit
+                  </Button>
                 </Grid>
               </Grid>
             </MuiPickersUtilsProvider>
-            <Button
-              variant="contained"
-              type="submit"
-              color="primary"
-              className={classes.button}
-            >
-              Submit
-            </Button>
-          </form> : 'Select Offer'
+          </form>
+        ) : (
+          'Select Offer'
         );
       }}
     </Formik>

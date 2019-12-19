@@ -5,7 +5,7 @@ import CompanyInfo from '../../components/Offers/CompanyInfo/CompanyInfo';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import * as actions from '../../store/actions/index';
-import OfferForm from '../../components/Offers/OfferForm/OfferForm'
+import OfferForm from '../../components/Offers/OfferForm/OfferForm';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
@@ -17,9 +17,7 @@ const offersPage = () => {
     state => state.companies.selectedCompanyOffers
   );
 
-  const selectedOffer = useSelector(
-    state => state.companies.selectedOffer
-  );
+  const selectedOffer = useSelector(state => state.companies.selectedOffer);
 
   const selectedCompany = useSelector(state => state.companies.selectedCompany);
 
@@ -27,7 +25,8 @@ const offersPage = () => {
     dispatch(actions.setSelectedOfferSuccess(offer));
   };
 
-  const handeleSubmittedRequest = submittedRequest => {
+  const handleSubmittedRequest = submittedRequest => {
+    console.log('handleSubmittedReq');
     console.log(submittedRequest);
   };
 
@@ -38,12 +37,25 @@ const offersPage = () => {
           <CompanyInfo selectedCompany={selectedCompany} />
         </Grid>
         <Grid item xs={12} style={{display: 'flex', flexWrap: 'wrap'}}>
-          <OfferCard selectedCompanyOffers={selectedCompanyOffers}  selectedOffer={selectedOffer} onSelectOffer={handeleSelectOffer} />
-        </Grid>
-        <Grid item xs={12} style={{display: 'flex', flexWrap: 'wrap'}}>
-         <OfferForm
+          <OfferCard
+            selectedCompanyOffers={selectedCompanyOffers}
             selectedOffer={selectedOffer}
-            onSubmitRequesrt={handeleSubmittedRequest}
+            onSelectOffer={handeleSelectOffer}
+          />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            paddingBottom: '1rem',
+            paddingTop: '1rem',
+          }}
+        >
+          <OfferForm
+            selectedOffer={selectedOffer}
+            onSubmitRequest={handleSubmittedRequest}
           />
         </Grid>
       </Grid>

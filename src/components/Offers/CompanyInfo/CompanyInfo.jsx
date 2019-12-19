@@ -1,11 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-function CompanyInfo({ selectedCompany }) {
-
+function CompanyInfo({selectedCompany}) {
   const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
@@ -20,24 +19,26 @@ function CompanyInfo({ selectedCompany }) {
   const classes = useStyles();
 
   const CompanyInfo = () => {
-    return (
-      selectedCompany ?
+    return selectedCompany ? (
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.pos} color="textSecondary">
-          Company name: {selectedCompany.company}
+            Company name: {selectedCompany.company}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
-          Country: {selectedCompany.country}
+            Country: {selectedCompany.country}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
-          City: {selectedCompany.city}
+            City: {selectedCompany.city}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
-          {selectedCompany.address ? 'Address: '+selectedCompany.address: ''}
+            {selectedCompany.address
+              ? 'Address: ' + selectedCompany.address
+              : ''}
           </Typography>
         </CardContent>
-      </Card> :
+      </Card>
+    ) : (
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.pos} color="textSecondary">
@@ -45,12 +46,10 @@ function CompanyInfo({ selectedCompany }) {
           </Typography>
         </CardContent>
       </Card>
-    )
+    );
   };
 
-  return (
-     <CompanyInfo></CompanyInfo>
-  )
+  return <CompanyInfo></CompanyInfo>;
 }
 
 export default CompanyInfo;
