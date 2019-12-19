@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {Grid, Paper} from '@material-ui/core';
@@ -30,13 +30,9 @@ const dashboard = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const getCompanies = useCallback(() => dispatch(actions.getCompanies()), [
-    dispatch,
-  ]);
-
   useEffect(() => {
-    getCompanies();
-  }, [dispatch]);
+   dispatch(actions.getCompanies());
+  }, []);
 
   const classes = useStyles();
 

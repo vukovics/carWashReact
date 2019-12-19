@@ -6,8 +6,7 @@ import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
 import {SnackbarProvider} from 'material-ui-snackbar-redux';
 import throtlle from 'lodash/throttle';
-
-import './index.css';
+import './index.scss';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import authReducer from './store/reducers/auth.reducer';
@@ -16,6 +15,12 @@ import companiesReducer from './store/reducers/company.reducer';
 import {snackbarReducer} from 'material-ui-snackbar-redux';
 import {loadState, saveState} from './localStorage/localStorage';
 import {jwtInterceptor} from './jwtInterceptor/jwtInterceptor';
+
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 const composeEnhancers =
   process.env.NODE_ENV === 'development'

@@ -42,8 +42,6 @@ function OfferCard({ selectedCompanyOffers, onSelectOffer, selectedOffer }) {
 
   const classes = useStyles();
 
- console.log(selectedOffer);
-
   const OfferCard = () => {
     return selectedCompanyOffers && selectedCompanyOffers.length > 0 ?
     selectedCompanyOffers.map(offer => (

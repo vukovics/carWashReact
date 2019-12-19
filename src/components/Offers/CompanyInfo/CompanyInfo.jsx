@@ -1,7 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -39,7 +37,7 @@ function CompanyInfo({ selectedCompany }) {
           {selectedCompany.address ? 'Address: '+selectedCompany.address: ''}
           </Typography>
         </CardContent>
-      </Card>:
+      </Card> :
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.pos} color="textSecondary">
