@@ -26,6 +26,23 @@ export const getCompanies = () => {
   };
 };
 
+export const getUserReservations = () => {
+  return dispatch => {
+    companyService.getCompanies().then(
+      companies => {
+        dispatch(getCompaniesSuccess(companies));
+      },
+      error => {
+        dispatch(
+          snackbar.show({
+            message: error.message,
+          })
+        );
+      }
+    );
+  };
+};
+
 export const getCompanyOfferSuccess = companyOffers => {
   return {
     type: actionTypes.GET_COMPANY_OFFERS_SUCCESS,
@@ -45,6 +62,32 @@ export const getSelectedCompanySuccess = selectedCompany => {
   return {
     type: actionTypes.GET_SELECTED_COMPANY_SUCCESS,
     selectedCompany: selectedCompany,
+  };
+};
+
+export const addOffer = (offer, history) => {
+  return dispatch => {
+    companyService
+      .addOffer(offer)
+      .then(
+        response => {
+          dispatch(
+            snackbar.show({
+              message: 'success',
+            })
+          );
+        },
+        error => {
+          dispatch(
+            snackbar.show({
+              message: error.message,
+            })
+          );
+        }
+      )
+      .then(() => {
+        history.push('/reservations');
+      });
   };
 };
 

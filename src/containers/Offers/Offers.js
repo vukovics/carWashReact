@@ -1,17 +1,18 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 import OfferCard from '../../components/Offers/OfferCard/OfferCard';
 import CompanyInfo from '../../components/Offers/CompanyInfo/CompanyInfo';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import * as actions from '../../store/actions/index';
 import OfferForm from '../../components/Offers/OfferForm/OfferForm';
-
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 
 const offersPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const selectedCompanyOffers = useSelector(
     state => state.companies.selectedCompanyOffers
@@ -25,9 +26,15 @@ const offersPage = () => {
     dispatch(actions.setSelectedOfferSuccess(offer));
   };
 
+  const user = useSelector(state => state.user.user)
+
   const handleSubmittedRequest = submittedRequest => {
-    console.log('handleSubmittedReq');
-    console.log(submittedRequest);
+    const offer = {
+      userInfo: user,
+      dateTime: submittedRequest,
+      selectedOffer: selectedOffer
+    }
+    dispatch(actions.addOffer(offer, history));
   };
 
   return (

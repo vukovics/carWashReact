@@ -6,11 +6,12 @@ import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
 import {SnackbarProvider} from 'material-ui-snackbar-redux';
 import throtlle from 'lodash/throttle';
-import './index.scss';
+import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import authReducer from './store/reducers/auth.reducer';
 import userReducer from './store/reducers/user.reducer';
+import reservationReducer from './store/reducers/reservation.reducer';
 import companiesReducer from './store/reducers/company.reducer';
 import {snackbarReducer} from 'material-ui-snackbar-redux';
 import {loadState, saveState} from './localStorage/localStorage';
@@ -30,6 +31,7 @@ const composeEnhancers =
 const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
+  reservations: reservationReducer,
   companies: companiesReducer,
   snackbar: snackbarReducer,
 });

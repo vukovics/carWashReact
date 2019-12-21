@@ -2,7 +2,8 @@ import axios from 'axios';
 export const companyService = {
     getCompanies,
     getCompanyOffers,
-    getSelectedCompanyById
+    getSelectedCompanyById,
+    addOffer
 };
 
 async function getCompanies() {
@@ -20,5 +21,10 @@ async function getCompanyOffers(companyId) {
 async function getSelectedCompanyById(companyId) {
     let url = 'http://localhost:8000/api/companyInfo/' + companyId;
     const response = await axios.get(url);
+    return response;
+}
+async function addOffer(offer) {
+    let url = 'http://localhost:8000/api/booking';
+    const response = await axios.post(url, offer);
     return response;
 }
