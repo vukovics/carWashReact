@@ -62,22 +62,32 @@ export const loginUser = (email, password, history) => {
   };
 };
 
-export const registerUser = (email, password) => {
+export const registerUser = (user, history) => {
   return dispatch => {
     dispatch(authStart());
-    // firebase.auth().createUserWithEmailAndPassword(email, password)
-    //   .then(() => {
-    //     dispatch(snackbar.show({
-    //       message: 'Registration success',
-    //     }))
-    //   }).catch(error => {
-    //     dispatch(snackbar.show({
-    //       message: error.message,
-    //       action: 'Login',
-    //     }))
-    //   });
+    authService
+      .register(user)
+      .then(
+        success => {
+          dispatch(
+            snackbar.show({
+              message: success.message,
+            })
+          );
+        },
+        error => {
+          dispatch(
+            snackbar.show({
+              message: error.message,
+            })
+          );
+        }
+      )
+      .then(history.push('/login'));
   };
 };
+
+
 
 export const setAuthRedirectPath = path => {
   return {

@@ -36,13 +36,14 @@ const register = props => {
 
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(actions.getCountries());
     // dispatch(actions.getCities());
   }, []);
 
-  const countries = useSelector(state => state.user.countries);
+  // const countries = useSelector(state => state.user.countries);
 
   return (
     <Formik
@@ -56,8 +57,7 @@ const register = props => {
       }}
       onSubmit={(values, {setSubmitting}) => {
         setSubmitting(true);
-        console.log(values);
-        // onSubmitRequest(values);
+        dispatch(actions.registerUser(values, history));
       }}
       validationSchema={Yup.object().shape({
         email: Yup.string()

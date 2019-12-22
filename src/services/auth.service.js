@@ -21,8 +21,18 @@ async function login(email, password) {
   return responseSuccess;
 }
 
-function register(email, password) {
-  console.log(email, password);
+async function register(user) {
+  const registration = {
+    email: user.email,
+    password: user.password,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    phone_number: user.number,
+  };
+
+  let url = 'http://localhost:8000/api/register';
+  const response = await axios.post(url, registration);
+  return response;
 }
 
 function logout() {
