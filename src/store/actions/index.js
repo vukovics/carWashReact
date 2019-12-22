@@ -5,7 +5,7 @@ export {
   setAuthRedirectPath,
   authCheckState,
 } from './auth.actions';
-export {getUserSuccess} from './user.actions';
+export {getUserSuccess, getCountries} from './user.actions';
 export {
   getCompanies,
   getCompanyOffers,

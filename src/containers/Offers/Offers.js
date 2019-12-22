@@ -17,23 +17,20 @@ const offersPage = () => {
   const selectedCompanyOffers = useSelector(
     state => state.companies.selectedCompanyOffers
   );
-
   const selectedOffer = useSelector(state => state.companies.selectedOffer);
-
   const selectedCompany = useSelector(state => state.companies.selectedCompany);
+  const user = useSelector(state => state.user.user);
 
   const handeleSelectOffer = offer => {
     dispatch(actions.setSelectedOfferSuccess(offer));
   };
 
-  const user = useSelector(state => state.user.user)
-
   const handleSubmittedRequest = submittedRequest => {
     const offer = {
       userInfo: user,
       dateTime: submittedRequest,
-      selectedOffer: selectedOffer
-    }
+      selectedOffer: selectedOffer,
+    };
     dispatch(actions.addOffer(offer, history));
   };
 

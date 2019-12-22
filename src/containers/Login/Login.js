@@ -13,7 +13,7 @@ import * as actions from '../../store/actions/index';
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
-    background: '#b7b7b775',
+    background: '#ffffff',
   },
   container: {
     display: 'flex',
@@ -55,14 +55,13 @@ const login = props => {
   return (
       <Container
         maxWidth="sm"
-        container
         spacing={0}
         direction="column"
-        alignItems="center"
         justify="center"
         style={{minHeight: '100vh'}}
       >
         <Paper className={classes.root}>
+          <p>Login</p>
           <form className={classes.container} noValidate autoComplete="off">
             <TextField
               className={classes.textField}
