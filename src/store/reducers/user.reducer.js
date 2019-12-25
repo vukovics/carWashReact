@@ -2,7 +2,9 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../shared/utility';
 
 export const initialUserState = {
-  user: null
+  user: {
+    isOwner: 0
+  }
 };
 
 const setUser = (state, action) => {

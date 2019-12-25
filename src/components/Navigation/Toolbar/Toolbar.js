@@ -13,10 +13,10 @@ const toolbar = (props) => (
       <Logo />
     </div>
     <span className={classes.welcomeMsg}>
-      {props.user ? `Welcome, ${props.user.firstname} ${props.user.firstname}` : ''}
+      {props.user.firstname && props.user.lastname ? `Welcome, ${props.user.firstname} ${props.user.lastname}` : ''}
     </span>
     <nav className={classes.DesktopOnly}>
-      <NavigationItems isAuthenticated={props.isAuth} />
+      <NavigationItems isAuthenticated={props.isAuth} isOwner={props.user.isOwner} />
     </nav>
   </header>
 );

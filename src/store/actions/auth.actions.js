@@ -49,6 +49,7 @@ export const loginUser = (email, password, history) => {
         user => {
           dispatch(authSuccess(user.data.user.id, user.data.token));
           dispatch(getUserSuccess(user.data.user));
+          redirectToPage(user.data.user, history);
         },
         error => {
           dispatch(
@@ -58,9 +59,17 @@ export const loginUser = (email, password, history) => {
           );
         }
       )
-      .then(history.push('/dashboard'));
+      // .then(history.push('/dashboard'));
   };
 };
+
+function redirectToPage(user, history) {
+  if(user[0].isOwner) {
+    history.push('/company-dashboard')
+  }else{
+    history.push('/')
+  }
+}
 
 export const registerUser = (user, history) => {
   return dispatch => {

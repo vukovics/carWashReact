@@ -11,6 +11,14 @@ const Login = React.lazy(() => {
   return import('./containers/Login/Login');
 });
 
+const CompanyDashboardPage = React.lazy(() => {
+  return import('./containers/CompanyDashboard/CompanyDashboard');
+});
+
+const CompanyReservationsPage = React.lazy(() => {
+  return import('./containers/CompanyReservations/CompanyReservations');
+});
+
 const Register = React.lazy(() => {
   return import('./containers/Register/Register');
 });
@@ -52,6 +60,18 @@ const app = props => {
         <Route exact path="/reservations" component={reservationsPage} />
       </Switch>
     );
+
+    if(props.isOwner) {
+      routes = (
+        <Switch>
+          <Route path="/" exact component={CompanyDashboardPage} />
+          <Route path="/logout" component={Logout} />
+          <Route exact path="/company-dashboard" component={CompanyDashboardPage} />
+          <Route exact path="/company-reservations" component={CompanyReservationsPage} />
+        </Switch>
+      );
+    }
+
   }
 
   return (
@@ -66,6 +86,7 @@ const app = props => {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.token !== null,
+    isOwner : state.user.user.isOwner !== 0,
   };
 };
 

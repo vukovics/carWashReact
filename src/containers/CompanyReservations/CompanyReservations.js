@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {useHistory} from 'react-router-dom';
 import {Grid, Paper} from '@material-ui/core';
 import TableReservations from '../../components/UI/TableReservations/TableReservations';
 import Container from '@material-ui/core/Container';
@@ -10,11 +9,11 @@ import {makeStyles} from '@material-ui/core/styles';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 
-const reservationsPage = () => {
+const CompanyReservations = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user.user);
+
   useEffect(() => {
-    dispatch(actions.getUserReservations(user.id));
+    dispatch(actions.getUserReservations(3));
   }, []);
 
   const useStyles = makeStyles({
@@ -45,15 +44,16 @@ const reservationsPage = () => {
     <Container>
       <Grid className={classes.tableCompany}>
         <Paper className={classes.root}>
-          <TableReservations
+          Company reservations
+          {/* <TableReservations
             columns={tableColumns}
             rows={userReservations}
             onAction={onActionHandle}
-          />
+          /> */}
         </Paper>
       </Grid>
     </Container>
   );
 };
 
-export default withErrorHandler(reservationsPage, axios);
+export default withErrorHandler(CompanyReservations, axios);

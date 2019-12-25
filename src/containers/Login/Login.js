@@ -3,10 +3,12 @@ import {connect} from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import {useDispatch} from 'react-redux';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import mainImage from '../../assets/images/main.jpg';
+import clasessFromCss from './Login.css'
 
 import * as actions from '../../store/actions/index';
 
@@ -14,6 +16,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
     background: '#ffffff',
+    flexGrow: 1,
   },
   container: {
     display: 'flex',
@@ -27,6 +30,16 @@ const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1),
   },
+  image: {
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    backgroundSize: 'cover',
+    justifyContent: 'center',
+    backgroundImage: `url(${mainImage})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center'
+  }
 }));
 
 const login = props => {
@@ -53,14 +66,13 @@ const login = props => {
   };
 
   return (
-      <Container
-        maxWidth="sm"
-        spacing={0}
-        direction="column"
-        justify="center"
-        style={{minHeight: '100vh'}}
-      >
-        <Paper className={classes.root}>
+    <Grid container spacing={3}>
+      <Grid item xs={6}>
+        <div className={classes.image}>
+        </div>
+      </Grid>
+      <Grid item xs={6}>
+        <Paper className={classes.root} xs={6}>
           <p>Login</p>
           <form className={classes.container} noValidate autoComplete="off">
             <TextField
@@ -91,7 +103,8 @@ const login = props => {
             </Button>
           </form>
         </Paper>
-      </Container>
+      </Grid>
+    </Grid>
   );
 };
 
