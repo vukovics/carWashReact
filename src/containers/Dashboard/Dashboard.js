@@ -2,28 +2,14 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {Grid, Paper} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
 import Table from '../../components/UI/Table/Table';
 import Container from '@material-ui/core/Container';
-
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
 import axios from '../../axios-orders';
+import classes from './Dashboard.css';
 
 const dashboard = () => {
-  const useStyles = makeStyles({
-    root: {
-      width: '100%',
-      overflowX: 'auto',
-    },
-    table: {
-      minWidth: 650,
-    },
-    tableCompany: {
-      padding: '2rem',
-    },
-  });
-
   let companies = [];
   let tableColumns = [];
 
@@ -31,10 +17,8 @@ const dashboard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-   dispatch(actions.getCompanies());
+    dispatch(actions.getCompanies());
   }, []);
-
-  const classes = useStyles();
 
   const handleBooking = company => {
     dispatch(actions.getCompanyOffers(company.company_id, history));
@@ -55,7 +39,7 @@ const dashboard = () => {
           />
         </Paper>
       </Grid>
-  </Container>
+    </Container>
   );
 };
 

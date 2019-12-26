@@ -7,8 +7,8 @@ import Button from '@material-ui/core/Button';
 import {useDispatch} from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 import mainImage from '../../assets/images/main.jpg';
-import clasessFromCss from './Login.css'
 
 import * as actions from '../../store/actions/index';
 
@@ -38,8 +38,8 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     backgroundImage: `url(${mainImage})`,
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
-  }
+    backgroundPosition: 'center',
+  },
 }));
 
 const login = props => {
@@ -66,12 +66,14 @@ const login = props => {
   };
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={6}>
-        <div className={classes.image}>
-        </div>
-      </Grid>
-      <Grid item xs={6}>
+    <Container
+      maxWidth="sm"
+      spacing={0}
+      direction="column"
+      justify="center"
+      style={{minHeight: '100vh'}}
+    >
+      <Grid item xs={12}>
         <Paper className={classes.root} xs={6}>
           <p>Login</p>
           <form className={classes.container} noValidate autoComplete="off">
@@ -104,7 +106,7 @@ const login = props => {
           </form>
         </Paper>
       </Grid>
-    </Grid>
+    </Container>
   );
 };
 

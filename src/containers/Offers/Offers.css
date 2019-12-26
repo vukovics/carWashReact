@@ -1,0 +1,15 @@
+.gridStyle {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.gridStyleMargin {
+  margin-bottom: 1rem;
+}
+
+.gridStyleDisplayFlex {
+  display: flex;
+  flex-wrap: wrap;
+}

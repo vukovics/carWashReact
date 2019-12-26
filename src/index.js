@@ -24,7 +24,7 @@ import 'mdbreact/dist/css/mdb.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const composeEnhancers =
-  process.env.NODE_ENV === 'prod'
+  process.env.NODE_ENV === 'development'
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     : null || compose;
 

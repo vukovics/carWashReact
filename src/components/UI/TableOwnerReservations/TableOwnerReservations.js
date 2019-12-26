@@ -2,7 +2,7 @@ import React from 'react';
 import { Table as MaterialTable, TableHead, TableBody, TableRow, TableCell, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
-function TableOwnerReservations({ columns, rows, bookingAction }) {
+function TableOwnerReservations({ columns, rows, bookingAction, actions }) {
 
   const TableColumns = () => columns.map((column, index) => <TableCell key={index} > {column} </TableCell>)
 
@@ -15,16 +15,15 @@ function TableOwnerReservations({ columns, rows, bookingAction }) {
           <TableCell>{row.fullName}</TableCell>
           <TableCell>{row.phone_number}</TableCell>
           <TableCell>{row.email}</TableCell>
-          <TableCell>
-            <Button variant="contained" disabled={row.book_status !== 0} onClick={() => bookingAction({data: row, type: 'accept'})} color="primary">
-              Accept
-            </Button>
-          </TableCell>
-          <TableCell>
-            <Button variant="contained" disabled={row.book_status !== 0} onClick={() => bookingAction({data: row, type: 'declined'})} color="primary">
-              Decline
-            </Button>
-          </TableCell>
+          {actions.length > 0 ?
+            actions.map(action => (
+            <TableCell>
+              <Button variant="contained" disabled={row.book_status !== 0} onClick={() => bookingAction({data: row, type: action.type})} color="primary">
+                {action.type}
+              </Button>
+            </TableCell>
+            )): ''
+          }
         </TableRow>
       )) :
       <TableRow key={'no-data-row'}>

@@ -9,6 +9,7 @@ import * as actions from '../../store/actions/index';
 import OfferForm from '../../components/Offers/OfferForm/OfferForm';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
+import classes from './Offers.css';
 
 const offersPage = () => {
   const dispatch = useDispatch();
@@ -37,26 +38,17 @@ const offersPage = () => {
   return (
     <Container>
       <Grid>
-        <Grid item xs={12} style={{marginBottom: '1rem'}}>
+        <Grid item xs={12} className={classes.gridStyleMargin}>
           <CompanyInfo selectedCompany={selectedCompany} />
         </Grid>
-        <Grid item xs={12} style={{display: 'flex', flexWrap: 'wrap'}}>
+        <Grid item xs={12} className={classes.gridStyleDisplayFlex}>
           <OfferCard
             selectedCompanyOffers={selectedCompanyOffers}
             selectedOffer={selectedOffer}
             onSelectOffer={handeleSelectOffer}
           />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            paddingBottom: '1rem',
-            paddingTop: '1rem',
-          }}
-        >
+        <Grid item xs={12} className={classes.gridStyle}>
           <OfferForm
             selectedOffer={selectedOffer}
             onSubmitRequest={handleSubmittedRequest}
