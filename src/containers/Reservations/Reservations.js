@@ -6,6 +6,7 @@ import TableReservations from '../../components/UI/TableReservations/TableReserv
 import Container from '@material-ui/core/Container';
 import * as actions from '../../store/actions/index';
 import {makeStyles} from '@material-ui/core/styles';
+import Echo from 'laravel-echo';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
@@ -16,6 +17,20 @@ const reservationsPage = () => {
   useEffect(() => {
     dispatch(actions.getUserReservations(user.id));
   }, []);
+
+  (window).Echo = new Echo({
+    broadcaster: "pusher",
+    key: "4dc45f15f5cfdb633e0c",
+    cluster: "eu",
+    encrypted: true
+  });
+
+  (window).Echo.channel("newBookingChannel").listen(
+    "newBooking",
+    e => {
+      dispatch(actions.getUserReservations(user.id));
+    }
+  );
 
   const useStyles = makeStyles({
     root: {

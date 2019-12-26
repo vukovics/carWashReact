@@ -16,15 +16,15 @@ import companiesReducer from './store/reducers/company.reducer';
 import {snackbarReducer} from 'material-ui-snackbar-redux';
 import {loadState, saveState} from './localStorage/localStorage';
 import {jwtInterceptor} from './jwtInterceptor/jwtInterceptor';
+import Pusher from 'pusher-js';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
-
 const composeEnhancers =
-  process.env.NODE_ENV === 'development'
+  process.env.NODE_ENV === 'prod'
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     : null || compose;
 
@@ -38,7 +38,7 @@ const rootReducer = combineReducers({
 
 jwtInterceptor();
 const persistState = loadState();
-
+const pusher = new Pusher('4dc45f15f5cfdb633e0c');
 const store = createStore(
   rootReducer,
   persistState,

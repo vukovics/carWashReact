@@ -30,6 +30,13 @@ const setSelectedOfferSuccess = (state, action) => {
   };
 };
 
+const setCompanyReservationsSuccess = (state, action) => {
+  return {
+    ...state,
+    companyReservations: action.companyReservations,
+  };
+};
+
 const reducer = (state = initialCompanyState, action) => {
   switch (action.type) {
     case actionTypes.GET_COMPANIES_SUCCESS:
@@ -40,6 +47,8 @@ const reducer = (state = initialCompanyState, action) => {
       return getSelectedCompanySuccess(state, action);
     case actionTypes.SET_SELECTED_OFFER_SUCCESS:
       return setSelectedOfferSuccess(state, action);
+    case actionTypes.GET_COMPANY_RESERVATIONS_SUCCESS:
+      return setCompanyReservationsSuccess(state, action);
     default:
       return state;
   }

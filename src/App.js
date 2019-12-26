@@ -35,6 +35,7 @@ const reservationsPage = React.lazy(() => {
   return import('./containers/Reservations/Reservations');
 });
 
+
 const app = props => {
   const { onTryAutoSignup } = props;
 

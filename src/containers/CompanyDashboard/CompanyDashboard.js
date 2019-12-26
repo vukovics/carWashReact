@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useHistory} from 'react-router-dom';
 import {Grid, Paper} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import Table from '../../components/UI/Table/Table';
+import TableOwnerReservations from '../../components/UI/TableOwnerReservations/TableOwnerReservations';
 import Container from '@material-ui/core/Container';
+import Echo from 'laravel-echo';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
@@ -24,38 +24,61 @@ const companyDashboard = () => {
     },
   });
 
-  let companies = [];
-  let tableColumns = [];
-
-  const history = useHistory();
   const dispatch = useDispatch();
 
+  const user = useSelector(state => state.user.user);
   useEffect(() => {
-   dispatch(actions.getCompanies());
+    dispatch(actions.getCompanyReservations(user.id));
   }, []);
 
   const classes = useStyles();
 
-  const handleBooking = company => {
-    // dispatch(actions.getCompanyBookings(company.company_id, history));
+  (window).Echo = new Echo({
+    broadcaster: "pusher",
+    key: "4dc45f15f5cfdb633e0c",
+    cluster: "eu",
+    encrypted: true
+  });
+
+  (window).Echo.channel("newBookingChannel").listen(
+    "newBooking",
+    e => {
+      dispatch(actions.getCompanyReservations(user.id));
+    }
+  );
+
+  const handleBooking = booking => {
+
+    booking.type === 'accept'
+      ? dispatch(actions.reservationAccept(booking.data.id))
+      : dispatch(actions.reservationDeclined(booking.data.id));
   };
 
-  tableColumns = ['Company', 'City', 'Working time', 'Book'];
-  companies = useSelector(state => state.companies.companies);
+  const tableColumns = [
+    'Company',
+    'Date',
+    'Name',
+    'Phone Number',
+    'Email',
+    '',
+    '',
+  ];
+  const companyReservations = useSelector(
+    state => state.companies.companyReservations
+  );
 
   return (
     <Container>
       <Grid className={classes.tableCompany}>
         <Paper className={classes.root}>
-          Company dashboard
-          {/* <Table
+          <TableOwnerReservations
             columns={tableColumns}
-            rows={companies}
-            onBook={handleBooking}
-          /> */}
+            rows={companyReservations}
+            bookingAction={handleBooking}
+          />
         </Paper>
       </Grid>
-  </Container>
+    </Container>
   );
 };
 

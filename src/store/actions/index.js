@@ -13,4 +13,9 @@ export {
   setSelectedOfferSuccess,
   addOffer,
 } from './company.actions';
-export {getUserReservations} from './reservation.actions';
+export {
+  getUserReservations,
+  getCompanyReservations,
+  reservationAccept,
+  reservationDeclined,
+} from './reservation.actions';
