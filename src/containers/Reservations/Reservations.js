@@ -18,16 +18,16 @@ const reservationsPage = () => {
     dispatch(actions.getUserReservations(user.id));
   }, []);
 
-  window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: '4dc45f15f5cfdb633e0c',
-    cluster: 'eu',
-    encrypted: true,
-  });
+  // window.Echo = new Echo({
+  //   broadcaster: 'pusher',
+  //   key: '4dc45f15f5cfdb633e0c',
+  //   cluster: 'eu',
+  //   encrypted: true,
+  // });
 
-  window.Echo.channel('newBookingChannel').listen('newBooking', e => {
-    dispatch(actions.getUserReservations(user.id));
-  });
+  // window.Echo.channel('newBookingChannel').listen('newBooking', e => {
+  //   dispatch(actions.getUserReservations(user.id));
+  // });
 
   function onActionHandle() {
     console.log('asda');

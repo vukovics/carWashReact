@@ -3,7 +3,8 @@ export const companyService = {
     getCompanies,
     getCompanyOffers,
     getSelectedCompanyById,
-    addOffer
+    addOffer,
+    getOwnerCompanies
 };
 
 async function getCompanies() {
@@ -14,6 +15,12 @@ async function getCompanies() {
 
 async function getCompanyOffers(companyId) {
     let url = 'http://localhost:8000/api/company/' + companyId;
+    const response = await axios.get(url);
+    return response;
+}
+
+async function getOwnerCompanies(userId) {
+    let url = 'http://localhost:8000/api/ownerCompanies/' + userId;
     const response = await axios.get(url);
     return response;
 }

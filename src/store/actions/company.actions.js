@@ -26,6 +26,23 @@ export const getCompanies = () => {
   };
 };
 
+export const getOwnerCompanies = (userId) => {
+  return dispatch => {
+    companyService.getOwnerCompanies(userId).then(
+      ownerCompanies => {
+        dispatch(getOwnerCompaniesSuccess(ownerCompanies));
+      },
+      error => {
+        dispatch(
+          snackbar.show({
+            message: error.message,
+          })
+        );
+      }
+    );
+  };
+};
+
 export const getUserReservations = () => {
   return dispatch => {
     companyService.getCompanies().then(
@@ -47,6 +64,13 @@ export const getCompanyOfferSuccess = companyOffers => {
   return {
     type: actionTypes.GET_COMPANY_OFFERS_SUCCESS,
     companyOffers: companyOffers,
+  };
+};
+
+export const getOwnerCompaniesSuccess = ownerCompanies => {
+  return {
+    type: actionTypes.GET_OWNER_COMPANIES_SUCCESS,
+    ownerCompanies: ownerCompanies.data.companies,
   };
 };
 

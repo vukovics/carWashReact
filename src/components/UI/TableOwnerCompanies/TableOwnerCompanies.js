@@ -2,23 +2,21 @@ import React from 'react';
 import { Table as MaterialTable, TableHead, TableBody, TableRow, TableCell, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
-function TableOwnerReservations({ columns, rows, onAction, actions }) {
+function TableOwnerCompanies({ columns, rows, onAction, actions }) {
 
   const TableColumns = () => columns.map((column, index) => <TableCell key={index} > {column} </TableCell>)
 
   const TableRows = () => {
     return rows && rows.length > 0 ?
       rows.map(row => (
-        <TableRow key={row.id}>
-          <TableCell>{row.company_name}</TableCell>
-          <TableCell>{row.date}</TableCell>
-          <TableCell>{row.fullName}</TableCell>
-          <TableCell>{row.phone_number}</TableCell>
-          <TableCell>{row.email}</TableCell>
+        <TableRow key={row.company_id}>
+          <TableCell>{row.company}</TableCell>
+          <TableCell>{row.country}</TableCell>
+          <TableCell>{row.city}</TableCell>
           {actions.length > 0 ?
             actions.map(action => (
             <TableCell key={action.type}>
-              <Button variant="contained" disabled={row.book_status && row.book_status !== 0} onClick={() => onAction({data: row, type: action.type})} color="primary">
+              <Button variant="contained" onClick={() => onAction({data: row, type: action.type})} color="primary">
                 {action.type}
               </Button>
             </TableCell>
@@ -49,4 +47,4 @@ function TableOwnerReservations({ columns, rows, onAction, actions }) {
   )
 }
 
-export default TableOwnerReservations;
+export default TableOwnerCompanies;

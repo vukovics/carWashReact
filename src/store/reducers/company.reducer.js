@@ -37,6 +37,13 @@ const setCompanyReservationsSuccess = (state, action) => {
   };
 };
 
+const setOwnerCompaniesSuccess = (state, action) => {
+  return {
+    ...state,
+    ownerCompanies: action.ownerCompanies,
+  };
+};
+
 const reducer = (state = initialCompanyState, action) => {
   switch (action.type) {
     case actionTypes.GET_COMPANIES_SUCCESS:
@@ -49,6 +56,8 @@ const reducer = (state = initialCompanyState, action) => {
       return setSelectedOfferSuccess(state, action);
     case actionTypes.GET_COMPANY_RESERVATIONS_SUCCESS:
       return setCompanyReservationsSuccess(state, action);
+    case actionTypes.GET_OWNER_COMPANIES_SUCCESS:
+      return setOwnerCompaniesSuccess(state, action);
     default:
       return state;
   }

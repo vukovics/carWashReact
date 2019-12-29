@@ -40,6 +40,27 @@ export const reservationAccept = reservationsId => {
   };
 };
 
+export const createNewCompanyOffer = offerDetails => {
+  return dispatch => {
+    reservationService.createNewCompanyOffer(offerDetails).then(
+      () => {
+        dispatch(
+          snackbar.show({
+            message: 'New Offer Created',
+          })
+        );
+      },
+      error => {
+        dispatch(
+          snackbar.show({
+            message: error.message,
+          })
+        );
+      }
+    );
+  };
+};
+
 export const reservationDeclined = reservationsId => {
   return dispatch => {
     reservationService.declined(reservationsId).then(

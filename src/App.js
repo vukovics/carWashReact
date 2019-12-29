@@ -35,6 +35,10 @@ const reservationsPage = React.lazy(() => {
   return import('./containers/Reservations/Reservations');
 });
 
+const offerPage = React.lazy(() => {
+  return import('./containers/CompanyOffers/CompanyOffers');
+});
+
 
 const app = props => {
   const { onTryAutoSignup } = props;
@@ -68,6 +72,7 @@ const app = props => {
           <Route path="/" exact component={CompanyDashboardPage} />
           <Route path="/logout" component={Logout} />
           <Route exact path="/company-dashboard" component={CompanyDashboardPage} />
+          <Route exact path="/company-offers" component={offerPage} />
           <Route exact path="/company-reservations" component={CompanyReservationsPage} />
         </Switch>
       );

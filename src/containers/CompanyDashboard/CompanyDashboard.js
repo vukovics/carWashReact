@@ -21,18 +21,18 @@ const companyDashboard = () => {
     booking.type === 'accept'
       ? dispatch(actions.reservationAccept(booking.data.id))
       : dispatch(actions.reservationDeclined(booking.data.id));
-
-    window.Echo = new Echo({
-      broadcaster: 'pusher',
-      key: '4dc45f15f5cfdb633e0c',
-      cluster: 'eu',
-      encrypted: true,
-    });
-
-    window.Echo.channel('newBookingChannel').listen('newBooking', e => {
-      dispatch(actions.getCompanyReservations(user.id));
-    });
   };
+
+  // window.Echo = new Echo({
+  //   broadcaster: 'pusher',
+  //   key: '4dc45f15f5cfdb633e0c',
+  //   cluster: 'eu',
+  //   encrypted: true,
+  // });
+
+  // window.Echo.channel('newBookingChannel').listen('newBooking', e => {
+  //   dispatch(actions.getCompanyReservations(user.id));
+  // });
 
   const tableColumns = [
     'Company',
@@ -43,10 +43,7 @@ const companyDashboard = () => {
     '',
     '',
   ];
-  const tableActions = [
-    {type:'Accept'},
-    {type: 'Declined'}
-  ];
+  const tableActions = [{type: 'Accept'}, {type: 'Declined'}];
   const companyReservations = useSelector(
     state => state.companies.companyReservations
   );
@@ -58,7 +55,7 @@ const companyDashboard = () => {
           <TableOwnerReservations
             columns={tableColumns}
             rows={companyReservations}
-            bookingAction={handleBooking}
+            onAction={handleBooking}
             actions={tableActions}
           />
         </Paper>

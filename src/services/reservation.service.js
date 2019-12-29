@@ -3,7 +3,8 @@ export const reservationService = {
     getUserReservations,
     getCompanyReservations,
     accept,
-    declined
+    declined,
+    createNewCompanyOffer
 };
 
 async function getUserReservations(userId) {
@@ -27,5 +28,11 @@ async function accept(reservationdId) {
 async function declined(reservationdId) {
     let url = 'http://localhost:8000/api/bookingDeclined/';
     const response = await axios.post(url, {bookingId : reservationdId, reason: ''});
+    return response;
+}
+
+async function createNewCompanyOffer(offerDetails) {
+    let url = 'http://localhost:8000/api/offer/';
+    const response = await axios.post(url, offerDetails);
     return response;
 }

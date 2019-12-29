@@ -12,10 +12,13 @@ export {
   getSelectedCompany,
   setSelectedOfferSuccess,
   addOffer,
+  getOwnerCompanies,
+  getOwnerCompaniesSuccess
 } from './company.actions';
 export {
   getUserReservations,
   getCompanyReservations,
   reservationAccept,
   reservationDeclined,
+  createNewCompanyOffer,
 } from './reservation.actions';
