@@ -1,4 +1,20 @@
-import React, {useEffect} from 'react';
+// import React, {useEffect, useParams} from 'react';
+// import Container from '@material-ui/core/Container';
+
+// const companyOffersList = () => {
+//   let {company_id} = useParams();
+
+//   useEffect(() => {
+//     console.log(company_id);
+//   }, []);
+
+//   return <Container>Offer LIst</Container>;
+// };
+
+// export default companyOffersList;
+
+
+import React, {useEffect, useParams} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Grid, Paper} from '@material-ui/core';
 import TableReservations from '../../components/UI/TableReservations/TableReservations';
@@ -9,12 +25,12 @@ import {makeStyles} from '@material-ui/core/styles';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 
-const CompanyReservations = () => {
+const CompanyOfferList = (props) => {
   const dispatch = useDispatch();
-
+  const { match: { params } } = props;
   useEffect(() => {
-    dispatch(actions.getUserReservations(3));
-  }, []);
+    console.log(params.id);
+    }, []);
 
   const useStyles = makeStyles({
     root: {
@@ -31,11 +47,6 @@ const CompanyReservations = () => {
 
   const classes = useStyles();
 
-  function onActionHandle() {
-    console.log('asda');
-  }
-
-  const tableColumns = ['Company', 'Name', 'Email', 'Date', 'Status', 'Action'];
   const userReservations = useSelector(
     state => state.reservations.userReservations
   );
@@ -45,15 +56,13 @@ const CompanyReservations = () => {
       <Grid className={classes.tableCompany}>
         <Paper className={classes.root}>
           Company reservations
-          {/* <TableReservations
-            columns={tableColumns}
-            rows={userReservations}
-            onAction={onActionHandle}
-          /> */}
+
         </Paper>
       </Grid>
     </Container>
   );
 };
 
-export default CompanyReservations;
+export default CompanyOfferList;
+
+

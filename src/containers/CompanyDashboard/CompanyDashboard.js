@@ -4,9 +4,7 @@ import {Grid, Paper} from '@material-ui/core';
 import TableOwnerReservations from '../../components/UI/TableOwnerReservations/TableOwnerReservations';
 import Container from '@material-ui/core/Container';
 import Echo from 'laravel-echo';
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
-import axios from '../../axios-orders';
 import classes from './CompanyDashboard.css';
 
 const companyDashboard = () => {
@@ -64,4 +62,4 @@ const companyDashboard = () => {
   );
 };
 
-export default withErrorHandler(companyDashboard, axios);
+export default companyDashboard;

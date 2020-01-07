@@ -11,31 +11,35 @@ const Login = React.lazy(() => {
   return import('./containers/Login/Login');
 });
 
-const CompanyDashboardPage = React.lazy(() => {
+const CompanyDashboard = React.lazy(() => {
   return import('./containers/CompanyDashboard/CompanyDashboard');
 });
 
-const CompanyReservationsPage = React.lazy(() => {
+const CompanyReservations = React.lazy(() => {
   return import('./containers/CompanyReservations/CompanyReservations');
+});
+
+const CompanyOfferList = React.lazy(() => {
+  return import('./containers/CompanyOfferList/CompanyOfferList');
 });
 
 const Register = React.lazy(() => {
   return import('./containers/Register/Register');
 });
 
-const homePage = React.lazy(() => {
+const home = React.lazy(() => {
   return import('./containers/HomePage/HomePage');
 });
 
-const offersPage = React.lazy(() => {
+const offers = React.lazy(() => {
   return import('./containers/Offers/Offers');
 });
 
-const reservationsPage = React.lazy(() => {
+const reservations = React.lazy(() => {
   return import('./containers/Reservations/Reservations');
 });
 
-const offerPage = React.lazy(() => {
+const offer = React.lazy(() => {
   return import('./containers/CompanyOffers/CompanyOffers');
 });
 
@@ -51,7 +55,7 @@ const app = props => {
     <Switch>
       <Route path="/login" render={props => <Login {...props} />} />
       <Route path="/register" render={props => <Register {...props} />} />
-      <Route path="/" exact component={homePage} />
+      <Route path="/" exact component={home} />
       <Redirect to="/" />
     </Switch>
   );
@@ -61,19 +65,20 @@ const app = props => {
       <Switch>
         <Route path="/" exact component={Dashboard} />
         <Route path="/logout" component={Logout} />
-        <Route exact path="/offers" component={offersPage} />
-        <Route exact path="/reservations" component={reservationsPage} />
+        <Route exact path="/offers" component={offers} />
+        <Route exact path="/reservations" component={reservations} />
       </Switch>
     );
 
     if(props.isOwner) {
       routes = (
         <Switch>
-          <Route path="/" exact component={CompanyDashboardPage} />
+          <Route path="/" exact component={CompanyDashboard} />
           <Route path="/logout" component={Logout} />
-          <Route exact path="/company-dashboard" component={CompanyDashboardPage} />
-          <Route exact path="/company-offers" component={offerPage} />
-          <Route exact path="/company-reservations" component={CompanyReservationsPage} />
+          <Route exact path="/company-dashboard" component={CompanyDashboard} />
+          <Route exact path="/company-offers" component={offer} />
+          <Route exact path="/company-reservations" component={CompanyReservations} />
+          <Route exact path="/company-offer-list/:id" component={CompanyOfferList} />
         </Switch>
       );
     }

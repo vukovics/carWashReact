@@ -18,7 +18,7 @@ function TableOwnerReservations({ columns, rows, onAction, actions }) {
           {actions.length > 0 ?
             actions.map(action => (
             <TableCell key={action.type}>
-              <Button variant="contained" disabled={row.book_status && row.book_status !== 0} onClick={() => onAction({data: row, type: action.type})} color="primary">
+              <Button variant="contained" disabled={row.book_status !== 0} onClick={() => onAction({data: row, type: action.type})} color="primary">
                 {action.type}
               </Button>
             </TableCell>
