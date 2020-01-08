@@ -7,7 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import {Link} from 'react-router-dom';
 import * as Yup from 'yup';
 import {Formik, validateYupSchema} from 'formik';
 
@@ -30,11 +29,7 @@ const OfferDialog = props => {
         </DialogContentText>
         <Formik
           isValid={validateYupSchema}
-          initialValues={{
-            name: '',
-            description: '',
-            price: '',
-          }}
+          initialValues={props.selectedOffer}
           onSubmit={(values, {setSubmitting}) => {
             setSubmitting(true);
             props.onSubmit(values);

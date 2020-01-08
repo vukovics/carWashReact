@@ -30,7 +30,6 @@ const CompanyOffers = () => {
   }
 
   const redirectToOfferList = selectedCompany => {
-    console.log(selectedCompany);
     history.push('/company-offer-list/'+selectedCompany.data.company_id);
   };
 

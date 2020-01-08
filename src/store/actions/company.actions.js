@@ -26,11 +26,56 @@ export const getCompanies = () => {
   };
 };
 
-export const getOwnerCompanies = (userId) => {
+export const getSingleCompanyOffer = company_id => {
+  return dispatch => {
+    companyService.getSingleCompanyOffer(company_id).then(
+      companyOffers => {
+        dispatch(getSingleCompanyOfferSuccess(companyOffers));
+      },
+      error => {
+        dispatch(
+          snackbar.show({
+            message: error.message,
+          })
+        );
+      }
+    );
+  };
+};
+
+export const getSingleCompanyOfferSuccess = companyOffers => {
+  return {
+    type: actionTypes.GET_COMPANIE_OFFERS_SUCCESS,
+    offers: companyOffers,
+  };
+};
+
+export const getOwnerCompanies = userId => {
   return dispatch => {
     companyService.getOwnerCompanies(userId).then(
       ownerCompanies => {
         dispatch(getOwnerCompaniesSuccess(ownerCompanies));
+      },
+      error => {
+        dispatch(
+          snackbar.show({
+            message: error.message,
+          })
+        );
+      }
+    );
+  };
+};
+
+export const deleteCompanyOffer = offer => {
+  return dispatch => {
+    companyService.deleteCompanyOffer(offer).then(
+      (response) => {
+        dispatch(
+          snackbar.show({
+            message: 'Deleted!',
+          })
+        );
       },
       error => {
         dispatch(
@@ -80,7 +125,6 @@ export const setSelectedOfferSuccess = offer => {
     selectedOffer: offer,
   };
 };
-
 
 export const getSelectedCompanySuccess = selectedCompany => {
   return {
@@ -137,21 +181,19 @@ export const getCompanyOffers = (companyId, history) => {
   };
 };
 
-export const getSelectedCompany = (companyId) => {
+export const getSelectedCompany = companyId => {
   return dispatch => {
-    companyService
-      .getSelectedCompanyById(companyId)
-      .then(
-        company => {
-          dispatch(getSelectedCompanySuccess(company.data.company));
-        },
-        error => {
-          dispatch(
-            snackbar.show({
-              message: error.message,
-            })
-          );
-        }
-      )
+    companyService.getSelectedCompanyById(companyId).then(
+      company => {
+        dispatch(getSelectedCompanySuccess(company.data.company));
+      },
+      error => {
+        dispatch(
+          snackbar.show({
+            message: error.message,
+          })
+        );
+      }
+    );
   };
 };
