@@ -9,10 +9,24 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import * as Yup from 'yup';
 import {Formik, validateYupSchema} from 'formik';
+import classes from './OfferDialog.css';
 
 const OfferDialog = props => {
+
   function handleClose() {
     props.onClose();
+  }
+
+  function checkInitialValues() {
+    if (!props.selectedOffer) {
+      return {
+        name: '',
+        description: '',
+        price: '',
+      };
+    } else {
+      return props.selectedOffer;
+    }
   }
 
   return (
@@ -21,15 +35,15 @@ const OfferDialog = props => {
       onClose={props.onClose}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-      <DialogContent>
+      <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
+      <DialogContent  className={classes.dialogContent}>
         <DialogContentText>
           To subscribe to this website, please enter your email address here. We
           will send updates occasionally.
         </DialogContentText>
         <Formik
           isValid={validateYupSchema}
-          initialValues={props.selectedOffer}
+          initialValues={checkInitialValues()}
           onSubmit={(values, {setSubmitting}) => {
             setSubmitting(true);
             props.onSubmit(values);
@@ -56,7 +70,6 @@ const OfferDialog = props => {
                 spacing={0}
                 direction="column"
                 justify="center"
-                style={{minHeight: '100vh'}}
               >
                 <form onSubmit={handleSubmit} noValidate autoComplete="off">
                   <TextField
@@ -118,3 +131,4 @@ const OfferDialog = props => {
 };
 
 export default OfferDialog;
+

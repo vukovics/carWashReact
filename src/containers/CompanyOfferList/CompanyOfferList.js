@@ -5,7 +5,7 @@ import Container from '@material-ui/core/Container';
 import * as actions from '../../store/actions/index';
 import OfferDialog from '../../components/UI/Dialogs/OfferDialog/OfferDialog';
 import QuestionDialog from '../../components/UI/Dialogs/QuestionDialog/QuestionDialog';
-import TableSingleCompanyOffers from '../../components/UI/TableSingleCompanyOffers/TableSingleCompanyOffers';
+import TablePagginated from '../../components/UI/Tables/TablePagginated/TablePagginated';
 
 const CompanyOfferList = props => {
   const dispatch = useDispatch();
@@ -19,23 +19,15 @@ const CompanyOfferList = props => {
     dispatch(actions.getSingleCompanyOffer(params.id));
   }, []);
 
-  const tableColumns = [
-    'Company',
-    'Date',
-    'Name',
-    'Phone Number',
-    'Email',
-    '',
-    '',
-  ];
 
   const handleClose = () => {
     setEditOpen(false);
     setDeleteOpen(false);
   };
 
-  const handleSubmit = updateOffer => {
-    dispatch(actions.createNewCompanyOffer(updateOffer));
+  const handleSubmit = offer => {
+    dispatch(actions.updateCompanyOffer(offer));
+    dispatch(actions.getSingleCompanyOffer(params.id));
     handleClose();
   };
 
@@ -56,17 +48,43 @@ const CompanyOfferList = props => {
   };
 
   const companieOffers = useSelector(state => state.companies.offers);
+  const columns = [
+    {id: 'name', label: 'Name', minWidth: 170},
+    {id: 'description', label: 'Description', minWidth: 100},
+    {
+      id: 'price',
+      label: 'Price',
+      minWidth: 170,
+      align: 'right',
+      format: value => value.toLocaleString(),
+    },
+    {
+      id: 'edit',
+      label: 'Accept',
+      minWidth: 170,
+      align: 'right',
+      format: value => value.toFixed(2),
+    },
+    {
+      id: 'delete',
+      label: 'Declined',
+      minWidth: 170,
+      align: 'right',
+      format: value => value.toFixed(2),
+    },
+  ];
 
   return (
     <Container>
       <Grid>
-        <TableSingleCompanyOffers
-          columns={tableColumns}
-          rows={companieOffers}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-        />
+        <TablePagginated
+          onActionOne={handleEdit}
+          onActionTwo={handleDelete}
+          rowsFromComponent={companieOffers}
+          columnsFromComponent={columns}
+          />
         <OfferDialog
+          title= {'Edit Offer'}
           selectedOffer={selectedOffer}
           open={editOpen}
           onClose={handleClose}

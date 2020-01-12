@@ -50,6 +50,28 @@ export const getSingleCompanyOfferSuccess = companyOffers => {
   };
 };
 
+
+export const updateCompanyOffer = offer => {
+  return dispatch => {
+    companyService.updateCompanyOffer(offer).then(
+      () => {
+        dispatch(
+          snackbar.show({
+            message: 'Offer Updated',
+          })
+        );
+      },
+      error => {
+        dispatch(
+          snackbar.show({
+            message: error.message,
+          })
+        );
+      }
+    );
+  };
+};
+
 export const getOwnerCompanies = userId => {
   return dispatch => {
     companyService.getOwnerCompanies(userId).then(

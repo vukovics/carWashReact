@@ -16,7 +16,8 @@ export {
   getOwnerCompaniesSuccess,
   getSingleCompanyOffer,
   getSingleCompanyOfferSuccess,
-  deleteCompanyOffer
+  deleteCompanyOffer,
+  updateCompanyOffer
 } from './company.actions';
 export {
   getUserReservations,

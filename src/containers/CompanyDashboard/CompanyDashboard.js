@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Grid, Paper} from '@material-ui/core';
-import TableOwnerReservations from '../../components/UI/TableOwnerReservations/TableOwnerReservations';
+import TablePagginated from '../../components/UI/Tables/TablePagginated/TablePagginated'
 import Container from '@material-ui/core/Container';
 import Echo from 'laravel-echo';
 import * as actions from '../../store/actions/index';
 import classes from './CompanyDashboard.css';
+
+
 
 const companyDashboard = () => {
   const dispatch = useDispatch();
@@ -15,11 +17,14 @@ const companyDashboard = () => {
     dispatch(actions.getCompanyReservations(user.id));
   }, []);
 
-  const handleBooking = booking => {
-    booking.type === 'accept'
-      ? dispatch(actions.reservationAccept(booking.data.id))
-      : dispatch(actions.reservationDeclined(booking.data.id));
+  const handleAccept = booking => {
+    dispatch(actions.reservationAccept(booking.id))
   };
+
+  const handleDeclined = booking => {
+    dispatch(actions.reservationDeclined(booking.id));
+  };
+
 
   // window.Echo = new Echo({
   //   broadcaster: 'pusher',
@@ -32,29 +37,59 @@ const companyDashboard = () => {
   //   dispatch(actions.getCompanyReservations(user.id));
   // });
 
-  const tableColumns = [
-    'Company',
-    'Date',
-    'Name',
-    'Phone Number',
-    'Email',
-    '',
-    '',
-  ];
-  const tableActions = [{type: 'Accept'}, {type: 'Declined'}];
   const companyReservations = useSelector(
     state => state.companies.companyReservations
   );
+
+  const columns = [
+    {id: 'company_name', label: 'Company', minWidth: 170},
+    {id: 'date', label: 'Date', minWidth: 100},
+    {
+      id: 'name',
+      label: 'Name',
+      minWidth: 170,
+      align: 'right',
+      format: value => value.toLocaleString(),
+    },
+    {
+      id: 'phone_number',
+      label: 'Phone Number',
+      minWidth: 170,
+      align: 'right',
+      format: value => value.toLocaleString(),
+    },
+    {
+      id: 'email',
+      label: 'Email',
+      minWidth: 170,
+      align: 'right',
+      format: value => value.toFixed(2),
+    },
+    {
+      id: 'accept',
+      label: 'Accept',
+      minWidth: 170,
+      align: 'right',
+      format: value => value.toFixed(2),
+    },
+    {
+      id: 'declined',
+      label: 'Declined',
+      minWidth: 170,
+      align: 'right',
+      format: value => value.toFixed(2),
+    },
+  ];
 
   return (
     <Container>
       <Grid className={classes.tableCompany}>
         <Paper className={classes.root}>
-          <TableOwnerReservations
-            columns={tableColumns}
-            rows={companyReservations}
-            onAction={handleBooking}
-            actions={tableActions}
+        <TablePagginated
+          onActionOne={handleAccept}
+          onActionTwo={handleDeclined}
+          rowsFromComponent={companyReservations}
+          columnsFromComponent={columns}
           />
         </Paper>
       </Grid>

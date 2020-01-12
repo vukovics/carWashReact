@@ -1,0 +1,9 @@
+.dialogWidth {
+  width: 600px;
+  min-height: auto;
+  max-height: 600px
+}
+.dialogContent{
+  height: auto;
+  min-height: auto;
+}

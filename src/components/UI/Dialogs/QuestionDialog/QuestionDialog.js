@@ -12,7 +12,6 @@ const QuestionDialog = props => {
   }
 
   function onSubmit(selectedOffer) {
-    console.log(selectedOffer)
     props.onDelete(selectedOffer);
   }
 
@@ -20,18 +19,19 @@ const QuestionDialog = props => {
     <Dialog
       open={props.open}
       onClose={props.onClose}
-      aria-labelledby="form-dialog-title"
+      fullWidth={true}
+      maxWidth={'sm'}
     >
-      <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+      <DialogTitle id="form-dialog-title">Delete Offer</DialogTitle>
       <DialogContent>
         <DialogContentText>{props.question}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button color="primary" onClick={handleClose} autoFocus>
           Cancel
         </Button>
-        <Button onClick={() => onSubmit(props)} color="primary" autoFocus>
-          Accept
+        <Button color="secondary" onClick={() => onSubmit(props)}>
+          Delete
         </Button>
       </DialogActions>
     </Dialog>

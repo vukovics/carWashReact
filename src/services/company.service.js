@@ -7,6 +7,7 @@ export const companyService = {
   getOwnerCompanies,
   getSingleCompanyOffer,
   deleteCompanyOffer,
+  updateCompanyOffer,
 };
 
 async function getCompanies() {
@@ -47,5 +48,11 @@ async function getSingleCompanyOffer(company_id) {
 async function deleteCompanyOffer(offer_id) {
   let url = 'http://localhost:8000/api/offerDelete/' + offer_id;
   const response = await axios.get(url);
+  return response.data.offers;
+}
+
+async function updateCompanyOffer(offer) {
+  let url = 'http://localhost:8000/api/offerUpdate/';
+  const response = await axios.post(url, offer);
   return response.data.offers;
 }
